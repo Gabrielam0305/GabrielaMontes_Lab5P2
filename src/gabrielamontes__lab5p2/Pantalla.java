@@ -64,6 +64,12 @@ public class Pantalla extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jt_Personajes = new javax.swing.JTree();
         jLabel11 = new javax.swing.JLabel();
+        jf_eliminar = new javax.swing.JFrame();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        tf_pos = new javax.swing.JTextField();
+        jb_remove = new javax.swing.JButton();
+        pp_listar = new javax.swing.JPopupMenu();
         jPanel1 = new javax.swing.JPanel();
         jb_crud = new javax.swing.JButton();
         jb_listar = new javax.swing.JButton();
@@ -212,6 +218,11 @@ public class Pantalla extends javax.swing.JFrame {
         });
 
         jb_eliminar.setText("Eliminar");
+        jb_eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_eliminarMouseClicked(evt);
+            }
+        });
 
         jb_mod.setText("Modificar");
         jb_mod.addActionListener(new java.awt.event.ActionListener() {
@@ -264,6 +275,11 @@ public class Pantalla extends javax.swing.JFrame {
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Mortal Kombat");
         treeNode1.add(treeNode2);
         jt_Personajes.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jt_Personajes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jt_PersonajesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jt_Personajes);
 
         jLabel11.setText("jLabel11");
@@ -273,23 +289,68 @@ public class Pantalla extends javax.swing.JFrame {
         jf_treeLayout.setHorizontalGroup(
             jf_treeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jf_treeLayout.createSequentialGroup()
-                .addGroup(jf_treeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jf_treeLayout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jf_treeLayout.createSequentialGroup()
-                        .addGap(296, 296, 296)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(319, Short.MAX_VALUE))
+                .addGap(56, 56, 56)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(118, 118, 118)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(276, Short.MAX_VALUE))
         );
         jf_treeLayout.setVerticalGroup(
             jf_treeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jf_treeLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49)
+                .addGroup(jf_treeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(78, Short.MAX_VALUE))
+        );
+
+        jLabel21.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel21.setText("Eliminar");
+
+        jLabel12.setText("nombre");
+
+        jb_remove.setText("Eliminar");
+        jb_remove.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_removeMouseClicked(evt);
+            }
+        });
+        jb_remove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_removeActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jf_eliminarLayout = new javax.swing.GroupLayout(jf_eliminar.getContentPane());
+        jf_eliminar.getContentPane().setLayout(jf_eliminarLayout);
+        jf_eliminarLayout.setHorizontalGroup(
+            jf_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jf_eliminarLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(tf_pos, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jf_eliminarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jb_remove)
+                .addGap(123, 123, 123))
+        );
+        jf_eliminarLayout.setVerticalGroup(
+            jf_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jf_eliminarLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jf_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_pos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addComponent(jb_remove)
+                .addGap(15, 15, 15))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -356,7 +417,7 @@ public class Pantalla extends javax.swing.JFrame {
         jd_crud.pack();
         jd_crud.setLocationRelativeTo(this);
         jd_crud.setVisible(true);
-         this.setVisible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_jb_crudMouseClicked
 
     private void jb_modActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_modActionPerformed
@@ -368,11 +429,11 @@ public class Pantalla extends javax.swing.JFrame {
         jf_crear.setLocationRelativeTo(jd_crud);
         jf_crear.setVisible(true);
         jd_crud.setVisible(false);
-    
+
     }//GEN-LAST:event_jb_crearMouseClicked
 
     private void jb_agregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_agregarMouseClicked
-          Personaje p=new Personaje();
+        Personaje p = new Personaje();
         p.setNombre(tf_nombre.getText());
         p.setPoder(tf_poder.getText());
         p.setDebilidad(tf_debilidad.getText());
@@ -381,25 +442,25 @@ public class Pantalla extends javax.swing.JFrame {
         p.setAfisica(Integer.parseInt(js_fisica.getValue().toString()));
         p.setAmental(Integer.parseInt(js_mental.getValue().toString()));
         p.setVida(Integer.parseInt(js_hp.getValue().toString()));
-        
-         DefaultTreeModel m = (DefaultTreeModel) jt_Personajes.getModel();
+
+        DefaultTreeModel m = (DefaultTreeModel) jt_Personajes.getModel();
         DefaultMutableTreeNode raiz
                 = (DefaultMutableTreeNode) m.getRoot();
         for (int i = 0; i < raiz.getChildCount(); i++) {
             if (((raiz.getChildAt(i).toString()).equals((p.getUniverso())))) {
-                DefaultMutableTreeNode nodo= new DefaultMutableTreeNode(p );
+                DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(p);
                 ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(nodo);
             }
         }
         m.reload();
-       tf_nombre.setText("");
-       tf_poder.setText("");
-       tf_debilidad.setText("");
-       cb_universo.setSelectedIndex(0);
-       js_fuerza.setValue(0);
-       js_fisica.setValue(0);
-       js_hp.setValue(0);
-       js_mental.setValue(0);
+        tf_nombre.setText("");
+        tf_poder.setText("");
+        tf_debilidad.setText("");
+        cb_universo.setSelectedIndex(0);
+        js_fuerza.setValue(0);
+        js_fisica.setValue(0);
+        js_hp.setValue(0);
+        js_mental.setValue(0);
         JOptionPane.showConfirmDialog(jf_crear, "Personaje Agregado");
         jf_crear.setVisible(false);
         this.setVisible(true);
@@ -411,6 +472,46 @@ public class Pantalla extends javax.swing.JFrame {
         jf_tree.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jb_listarMouseClicked
+
+    private void jb_removeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_removeMouseClicked
+        eliminar();
+    }//GEN-LAST:event_jb_removeMouseClicked
+
+    private void jb_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_eliminarMouseClicked
+        jf_eliminar.pack();
+        jf_eliminar.setLocationRelativeTo(jd_crud);
+        jf_eliminar.setVisible(true);
+        jd_crud.setVisible(false);
+    }//GEN-LAST:event_jb_eliminarMouseClicked
+
+    private void jb_removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_removeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_removeActionPerformed
+
+    private void jt_PersonajesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_PersonajesMouseClicked
+
+        //izquierda a derecha
+        if (evt.isMetaDown()) {
+            //seleccionar un nodo con click derecho
+            int row = jt_Personajes.getClosestRowForLocation(
+                    evt.getX(), evt.getY());
+            jt_Personajes.setSelectionRow(row);
+            Object v1
+                    = jt_Personajes.getSelectionPath().
+                            getLastPathComponent();
+            DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) v1;
+            if (nodo.getUserObject() instanceof ) {
+                persona_seleccionada
+                        = (Persona) nodo_seleccionado.
+                                getUserObject();
+                menu_popup.show(evt.getComponent(),
+                        evt.getX(), evt.getY());
+            } else {
+
+            }
+
+        }
+    }//GEN-LAST:event_jt_PersonajesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -452,7 +553,9 @@ public class Pantalla extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -468,20 +571,40 @@ public class Pantalla extends javax.swing.JFrame {
     private javax.swing.JButton jb_eliminar;
     private javax.swing.JButton jb_listar;
     private javax.swing.JButton jb_mod;
+    private javax.swing.JButton jb_remove;
     private javax.swing.JButton jb_simulacion;
     private javax.swing.JDialog jd_crud;
     private javax.swing.JFrame jf_crear;
+    private javax.swing.JFrame jf_eliminar;
     private javax.swing.JFrame jf_tree;
     private javax.swing.JSpinner js_fisica;
     private javax.swing.JSpinner js_fuerza;
     private javax.swing.JSpinner js_hp;
     private javax.swing.JSpinner js_mental;
     private javax.swing.JTree jt_Personajes;
+    private javax.swing.JPopupMenu pp_listar;
     private javax.swing.JTextField tf_debilidad;
     private javax.swing.JTextField tf_nombre;
     private javax.swing.JTextField tf_poder;
+    private javax.swing.JTextField tf_pos;
     // End of variables declaration//GEN-END:variables
-DefaultTableModel tmodel=new DefaultTableModel();
-ArrayList <Personaje> personajes=new ArrayList();
-DefaultListModel lmodel=new DefaultListModel();
+DefaultTableModel tmodel = new DefaultTableModel();
+    ArrayList<Personaje> personajes = new ArrayList();
+    DefaultListModel lmodel = new DefaultListModel();
+
+    public void eliminar() {
+        DefaultTreeModel m = (DefaultTreeModel) jt_Personajes.getModel();
+        DefaultMutableTreeNode raiz
+                = (DefaultMutableTreeNode) m.getRoot();
+        for (int i = 0; i < raiz.getChildCount(); i++) {
+            for (int j = 0; j < raiz.getChildAt(i).getChildCount(); j++) {
+                if (((raiz.getChildAt(i).getChildAt(j).toString()).equals((tf_pos.getText())))) {
+                    ((DefaultMutableTreeNode) raiz.getChildAt(i)).remove(j);
+                }
+            }
+        }
+        m.reload();
+        jf_eliminar.setVisible(false);
+        this.setVisible(true);
+    }
 }
