@@ -26,14 +26,14 @@ public class Pantalla extends javax.swing.JFrame {
     public Pantalla() {
         initComponents();
         tmodel.addColumn("Nombre");
-    tmodel.addColumn("Poder");
-    tmodel.addColumn("Debilidad");
-    tmodel.addColumn("Universo");
-    tmodel.addColumn("Fuerza");
-    tmodel.addColumn("Agilidad Fisica");
-    tmodel.addColumn("Agilidad mental");
-    tmodel.addColumn("Puntos de vida");
-    jt_listar.setModel(tmodel);
+        tmodel.addColumn("Poder");
+        tmodel.addColumn("Debilidad");
+        tmodel.addColumn("Universo");
+        tmodel.addColumn("Fuerza");
+        tmodel.addColumn("Agilidad Fisica");
+        tmodel.addColumn("Agilidad mental");
+        tmodel.addColumn("Puntos de vida");
+        jt_listar.setModel(tmodel);
     }
 
     /**
@@ -67,7 +67,6 @@ public class Pantalla extends javax.swing.JFrame {
         jd_crud = new javax.swing.JDialog();
         jb_crear = new javax.swing.JButton();
         jb_eliminar = new javax.swing.JButton();
-        jb_mod = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jf_tree = new javax.swing.JFrame();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -250,13 +249,6 @@ public class Pantalla extends javax.swing.JFrame {
             }
         });
 
-        jb_mod.setText("Modificar");
-        jb_mod.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jb_modActionPerformed(evt);
-            }
-        });
-
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Personajes");
 
@@ -270,8 +262,7 @@ public class Pantalla extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addGroup(jd_crudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jb_crear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jb_eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jb_mod, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)))
+                            .addComponent(jb_eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)))
                     .addGroup(jd_crudLayout.createSequentialGroup()
                         .addGap(70, 70, 70)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -286,9 +277,7 @@ public class Pantalla extends javax.swing.JFrame {
                 .addComponent(jb_crear, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jb_eliminar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jb_mod)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Personajes");
@@ -536,10 +525,6 @@ public class Pantalla extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jb_crudMouseClicked
 
-    private void jb_modActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_modActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jb_modActionPerformed
-
     private void jb_crearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_crearMouseClicked
         jf_crear.pack();
         jf_crear.setLocationRelativeTo(jd_crud);
@@ -617,30 +602,29 @@ public class Pantalla extends javax.swing.JFrame {
                     = jt_Personajes.getSelectionPath().
                             getLastPathComponent();
             DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) v1;
-             DefaultTreeModel m = (DefaultTreeModel) jt_Personajes.getModel();
-              DefaultMutableTreeNode raiz
-                = (DefaultMutableTreeNode) m.getRoot();
-              for (int i = 0; i < 3; i++) {
-                  if (nodo.equals(raiz.getChildAt(0))) {
-                tabla();
-                  }else if(nodo.equals(raiz.getChildAt(1))) {
-                tabla();
-                  }else if(nodo.equals(raiz.getChildAt(2))) {
-                tabla();
-                  }else if(nodo.equals(raiz.getChildAt(3))) {
-                tabla();
-                  }else {
-                      for (int j = 0; j < 10; j++) {
-                           if (nodo.equals((raiz.getChildAt(i)).getChildAt(j))){
-                                Personaje s=((Personaje) raiz.getChildAt(i).getChildAt(j));
-                               //metodo lista
-                               listar(s);
-                           }
-                           } 
-                      }
-  
-                  }
+            DefaultTreeModel m = (DefaultTreeModel) jt_Personajes.getModel();
+            DefaultMutableTreeNode raiz
+                    = (DefaultMutableTreeNode) m.getRoot();
+               
+                if (nodo.equals(raiz.getChildAt(0))) {
+                    tabla(0);
+                } else if (nodo.equals(raiz.getChildAt(1))) {
+                    tabla(1);
+                } else if (nodo.equals(raiz.getChildAt(2))) {
+                    tabla(2);
+                } else if (nodo.equals(raiz.getChildAt(3))) {
+                    tabla(3);
+                } else {
+                   JOptionPane.showMessageDialog(jf_tree, "No existe");
+                        }
+                for (Personaje p : personajes) {
+                    p.setValid(true);
+                    if (nodo.toString().equals(p.toString())) {
+                        listar(p);
+                    }
             }
+
+        }
 
     }//GEN-LAST:event_jt_PersonajesMouseClicked
 
@@ -649,21 +633,21 @@ public class Pantalla extends javax.swing.JFrame {
     }//GEN-LAST:event_jc_select2ActionPerformed
 
     private void cb_selectMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cb_selectMouseEntered
-        String nombre=cb_select.getSelectedItem().toString();
-            lmodel.removeAllElements();
+        String nombre = cb_select.getSelectedItem().toString();
+        lmodel.removeAllElements();
         if (nombre.equals("DC")) {
             for (Personaje p : personajes) {
-                
+
                 p.setValid(true);
                 lmodel.addElement(p);
-             jl_elements.setModel(lmodel);
+                jl_elements.setModel(lmodel);
             }
-        }else if (nombre.equals("Marvel")) {
-            
-        }else if (nombre.equals("Capcom")){
-            
-        }else{
-            
+        } else if (nombre.equals("Marvel")) {
+
+        } else if (nombre.equals("Capcom")) {
+
+        } else {
+
         }
     }//GEN-LAST:event_cb_selectMouseEntered
 
@@ -734,7 +718,6 @@ public class Pantalla extends javax.swing.JFrame {
     private javax.swing.JButton jb_crud;
     private javax.swing.JButton jb_eliminar;
     private javax.swing.JButton jb_listar;
-    private javax.swing.JButton jb_mod;
     private javax.swing.JButton jb_remove;
     private javax.swing.JButton jb_simulacion;
     private javax.swing.JComboBox<String> jc_select2;
@@ -763,61 +746,59 @@ DefaultTableModel tmodel = new DefaultTableModel();
     ArrayList<Personaje> personajes = new ArrayList();
     DefaultListModel lmodel = new DefaultListModel();
 
-    
-    public void listar(Personaje p){
-    lmodel.removeAllElements();
-        p.setValid(false);
-       lmodel.addElement(p);
+    public void listar(Personaje p) {
+        lmodel.addElement(p);
         jl_elements.setModel(lmodel);
-    
-}
-     public void tabla(int index){
-         //nombre, poder, debilidad, universo, fuerza, afisica, amental, vida;
-     while (tmodel.getRowCount()>0) {        
-        tmodel.removeRow(0);
+
     }
-         for (Personaje p : personajes){
-             if (index==0) {
-                 if (p.getUniverso().equals("DC")) {
-                      Object[] row = {p.getNombre(),p.getPoder(),p.getDebilidad(),p.getUniverso(),p.getFuerza(),p.getAfisica(),p.getAmental(),p.getVida()};
-                DefaultTableModel modelo = (DefaultTableModel) jt_listar.getModel();
-                modelo.addRow(row);
-                jt_listar.setModel(modelo);    
-                 }
-                
-             } else if (index==1) {
-                 if (p.getUniverso().equals("Marvel")) {
-                      Object[] row = {p.getNombre(),p.getPoder(),p.getDebilidad(),p.getUniverso(),p.getFuerza(),p.getAfisica(),p.getAmental(),p.getVida()};
-                DefaultTableModel modelo = (DefaultTableModel) jt_listar.getModel();
-                modelo.addRow(row);
-                jt_listar.setModel(modelo);    
-                 }
-             } else if (index==2) {
-                 if (p.getUniverso().equals("Marvel")) {
-                      Object[] row = {p.getNombre(),p.getPoder(),p.getDebilidad(),p.getUniverso(),p.getFuerza(),p.getAfisica(),p.getAmental(),p.getVida()};
-                DefaultTableModel modelo = (DefaultTableModel) jt_listar.getModel();
-                modelo.addRow(row);
-                jt_listar.setModel(modelo);    
-                 }
-                
-             } else if (index==2) {
-                 if (p.getUniverso().equals("Capcom")) {
-                      Object[] row = {p.getNombre(),p.getPoder(),p.getDebilidad(),p.getUniverso(),p.getFuerza(),p.getAfisica(),p.getAmental(),p.getVida()};
-                DefaultTableModel modelo = (DefaultTableModel) jt_listar.getModel();
-                modelo.addRow(row);
-                jt_listar.setModel(modelo);    
-                 }
-                 } else if (index==3) {
-                 if (p.getUniverso().equals("Mortal Kombat")) {
-                      Object[] row = {p.getNombre(),p.getPoder(),p.getDebilidad(),p.getUniverso(),p.getFuerza(),p.getAfisica(),p.getAmental(),p.getVida()};
-                DefaultTableModel modelo = (DefaultTableModel) jt_listar.getModel();
-                modelo.addRow(row);
-                jt_listar.setModel(modelo);    
-                 }
-                 }
-         }  
+
+    public void tabla(int index) {
+        //nombre, poder, debilidad, universo, fuerza, afisica, amental, vida;
+        while (tmodel.getRowCount() > 0) {
+            tmodel.removeRow(0);
+        }
+        for (Personaje p : personajes) {
+            if (index == 0) {
+                if (p.getUniverso().equals("DC")) {
+                    Object[] row = {p.getNombre(), p.getPoder(), p.getDebilidad(), p.getUniverso(), p.getFuerza(), p.getAfisica(), p.getAmental(), p.getVida()};
+                    DefaultTableModel modelo = (DefaultTableModel) jt_listar.getModel();
+                    modelo.addRow(row);
+                    jt_listar.setModel(modelo);
+                }
+
+            } else if (index == 1) {
+                if (p.getUniverso().equals("Marvel")) {
+                    Object[] row = {p.getNombre(), p.getPoder(), p.getDebilidad(), p.getUniverso(), p.getFuerza(), p.getAfisica(), p.getAmental(), p.getVida()};
+                    DefaultTableModel modelo = (DefaultTableModel) jt_listar.getModel();
+                    modelo.addRow(row);
+                    jt_listar.setModel(modelo);
+                }
+            } else if (index == 2) {
+                if (p.getUniverso().equals("Marvel")) {
+                    Object[] row = {p.getNombre(), p.getPoder(), p.getDebilidad(), p.getUniverso(), p.getFuerza(), p.getAfisica(), p.getAmental(), p.getVida()};
+                    DefaultTableModel modelo = (DefaultTableModel) jt_listar.getModel();
+                    modelo.addRow(row);
+                    jt_listar.setModel(modelo);
+                }
+
+            } else if (index == 2) {
+                if (p.getUniverso().equals("Capcom")) {
+                    Object[] row = {p.getNombre(), p.getPoder(), p.getDebilidad(), p.getUniverso(), p.getFuerza(), p.getAfisica(), p.getAmental(), p.getVida()};
+                    DefaultTableModel modelo = (DefaultTableModel) jt_listar.getModel();
+                    modelo.addRow(row);
+                    jt_listar.setModel(modelo);
+                }
+            } else if (index == 3) {
+                if (p.getUniverso().equals("Mortal Kombat")) {
+                    Object[] row = {p.getNombre(), p.getPoder(), p.getDebilidad(), p.getUniverso(), p.getFuerza(), p.getAfisica(), p.getAmental(), p.getVida()};
+                    DefaultTableModel modelo = (DefaultTableModel) jt_listar.getModel();
+                    modelo.addRow(row);
+                    jt_listar.setModel(modelo);
+                }
+            }
+        }
     }
-     
+
     public void eliminar() {
         DefaultTreeModel m = (DefaultTreeModel) jt_Personajes.getModel();
         DefaultMutableTreeNode raiz
