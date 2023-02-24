@@ -11,6 +11,7 @@ package gabrielamontes__lab5p2;
 public class Personaje {
     private String nombre, poder, debilidad, universo;
     private int fuerza, afisica, amental, vida;
+    private boolean valid;
     
   //click derecho universo listan los del universo  
     //clic drecho personajes, atributos
@@ -28,6 +29,8 @@ public class Personaje {
         this.amental = amental;
         this.vida = vida;
     }
+    
+    
 
     public String getNombre() {
         return nombre;
@@ -93,12 +96,23 @@ public class Personaje {
     public void setVida(int vida) {
         this.vida = vida;
     }
-    public String toString(boolean valid) {
-        if (valid==true) {
-            return this.nombre;
-        }else{
-            return this.nombre+" \n poder:" + this.poder + "\n fuerza" + this.fuerza + " \n Debilidad: " + this.debilidad + " \n Mental: " + this.amental + "\n vida" + this.vida;
-        }
+
+    public boolean isValid() {
+        return valid;
     }
+
+    public void setValid(boolean valid) {
+        this.valid = valid;
+    }
+    
+
+    @Override
+    public String toString() {
+        if (valid) {
+            return nombre;
+        }
+        return this.nombre+"\n Poder-> "+this.poder+"\n Fuerza-> "+this.fuerza+"\n Debilidad-> "+this.debilidad+"\n Agilidad Fisica-> "+this.afisica+"\n Agilidad Mental-> "+this.amental+"\n Puntos de vida-> "+this.vida;
+    }
+    
     
 }
