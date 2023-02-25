@@ -11,7 +11,7 @@ package gabrielamontes__lab5p2;
 public class Personaje {
     private String nombre, poder, debilidad, universo;
     private int fuerza, afisica, amental, vida;
-    private boolean valid;
+    private boolean valid, turno,doble;
     
   //click derecho universo listan los del universo  
     //clic drecho personajes, atributos
@@ -104,6 +104,23 @@ public class Personaje {
     public void setValid(boolean valid) {
         this.valid = valid;
     }
+
+    public boolean isTurno() {
+        return turno;
+    }
+
+    public void setTurno(boolean turno) {
+        this.turno = turno;
+    }
+
+    public boolean isDoble() {
+        return doble;
+    }
+
+    public void setDoble(boolean doble) {
+        this.doble = doble;
+    }
+    
     
 
     @Override

@@ -4,9 +4,11 @@
  */
 package gabrielamontes__lab5p2;
 
+import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -37,6 +39,7 @@ public class Pantalla extends javax.swing.JFrame {
         tmodel.addColumn("Agilidad mental");
         tmodel.addColumn("Puntos de vida");
         jt_listar.setModel(tmodel);
+
     }
 
     /**
@@ -84,11 +87,20 @@ public class Pantalla extends javax.swing.JFrame {
         jmi_eliminar = new javax.swing.JMenuItem();
         jf_simulacion = new javax.swing.JFrame();
         cb_select = new javax.swing.JComboBox<>();
-        jc_select2 = new javax.swing.JComboBox<>();
+        combobox_select2 = new javax.swing.JComboBox<>();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jl_p1 = new javax.swing.JList<>();
+        jl_personaje1 = new javax.swing.JList<>();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jl_p2 = new javax.swing.JList<>();
+        jl_personaje2 = new javax.swing.JList<>();
+        jb_batalla = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jf_batalla = new javax.swing.JFrame();
+        jlabel_jugador = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jb_fuerza = new javax.swing.JButton();
+        jb_mental = new javax.swing.JButton();
+        jb_resistencia = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jb_crud = new javax.swing.JButton();
         jb_listar = new javax.swing.JButton();
@@ -372,26 +384,38 @@ public class Pantalla extends javax.swing.JFrame {
 
         cb_select.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DC", "Marvel", "Capcom", "Mortal Kombat" }));
         cb_select.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                cb_selectMouseEntered(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cb_selectMouseClicked(evt);
             }
         });
 
-        jc_select2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DC", "Marvel", "Capcom", "Mortal Kombat" }));
-        jc_select2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jc_select2MouseEntered(evt);
+        combobox_select2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DC", "Marvel", "Capcom", "Mortal Kombat" }));
+        combobox_select2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                combobox_select2MouseClicked(evt);
             }
         });
-        jc_select2.addActionListener(new java.awt.event.ActionListener() {
+        combobox_select2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jc_select2ActionPerformed(evt);
+                combobox_select2ActionPerformed(evt);
             }
         });
 
-        jScrollPane4.setViewportView(jl_p1);
+        jl_personaje1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jl_personaje1MouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(jl_personaje1);
 
-        jScrollPane5.setViewportView(jl_p2);
+        jScrollPane5.setViewportView(jl_personaje2);
+
+        jb_batalla.setText("BATALLA!");
+        jb_batalla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_batallaMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jf_simulacionLayout = new javax.swing.GroupLayout(jf_simulacion.getContentPane());
         jf_simulacion.getContentPane().setLayout(jf_simulacionLayout);
@@ -403,26 +427,93 @@ public class Pantalla extends javax.swing.JFrame {
                     .addGroup(jf_simulacionLayout.createSequentialGroup()
                         .addComponent(cb_select, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jc_select2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(combobox_select2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(188, 188, 188))
                     .addGroup(jf_simulacionLayout.createSequentialGroup()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(143, 143, 143))))
+            .addGroup(jf_simulacionLayout.createSequentialGroup()
+                .addGap(276, 276, 276)
+                .addComponent(jb_batalla, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jf_simulacionLayout.setVerticalGroup(
             jf_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jf_simulacionLayout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addGap(89, 89, 89)
                 .addGroup(jf_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cb_select, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jc_select2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(combobox_select2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jf_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addGap(5, 5, 5)
+                .addComponent(jb_batalla)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel11.setText("Darle clic a un personaje de cada lista");
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane6.setViewportView(jTextArea1);
+
+        jb_fuerza.setText("Fuerza");
+        jb_fuerza.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_fuerzaMouseClicked(evt);
+            }
+        });
+
+        jb_mental.setText("Mental");
+        jb_mental.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_mentalMouseClicked(evt);
+            }
+        });
+
+        jb_resistencia.setText("Resistencia");
+        jb_resistencia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_resistenciaMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jf_batallaLayout = new javax.swing.GroupLayout(jf_batalla.getContentPane());
+        jf_batalla.getContentPane().setLayout(jf_batallaLayout);
+        jf_batallaLayout.setHorizontalGroup(
+            jf_batallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jf_batallaLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(jf_batallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlabel_jugador, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 686, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(44, Short.MAX_VALUE))
+            .addGroup(jf_batallaLayout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(jb_fuerza)
+                .addGap(150, 150, 150)
+                .addComponent(jb_mental)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jb_resistencia)
+                .addGap(110, 110, 110))
+        );
+        jf_batallaLayout.setVerticalGroup(
+            jf_batallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jf_batallaLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jlabel_jugador, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(jf_batallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jb_fuerza)
+                    .addComponent(jb_mental)
+                    .addComponent(jb_resistencia))
+                .addGap(30, 30, 30))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -442,6 +533,11 @@ public class Pantalla extends javax.swing.JFrame {
         });
 
         jb_simulacion.setText("Simulacion");
+        jb_simulacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_simulacionMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -579,23 +675,9 @@ public class Pantalla extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jt_PersonajesMouseClicked
 
-    private void jc_select2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jc_select2ActionPerformed
+    private void combobox_select2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox_select2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jc_select2ActionPerformed
-
-    private void cb_selectMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cb_selectMouseEntered
-        String nombre = cb_select.getSelectedItem().toString();
-        l2model.removeAllElements();
-        if (nombre.equals("DC")) {
-            listarper(0, l2model, jl_p1);
-        } else if (nombre.equals("Marvel")) {
-            listarper(1, l2model, jl_p1);
-        } else if (nombre.equals("Capcom")) {
-            listarper(2, l2model, jl_p1);
-        } else {
-            listarper(3, l2model, jl_p1);
-        }
-    }//GEN-LAST:event_cb_selectMouseEntered
+    }//GEN-LAST:event_combobox_select2ActionPerformed
 
     private void cb_universoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_universoActionPerformed
         // TODO add your handling code here:
@@ -638,19 +720,218 @@ public class Pantalla extends javax.swing.JFrame {
         this.setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked
 
-    private void jc_select2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jc_select2MouseEntered
-       String nombre = cb_select.getSelectedItem().toString();
+    private void jb_simulacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_simulacionMouseClicked
+        jf_simulacion.pack();
+        jf_simulacion.setLocationRelativeTo(jd_crud);
+        this.setVisible(false);
+        jf_simulacion.setVisible(true);
+    }//GEN-LAST:event_jb_simulacionMouseClicked
+
+    private void cb_selectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cb_selectMouseClicked
+        String nombre = cb_select.getSelectedItem().toString();
         l2model.removeAllElements();
         if (nombre.equals("DC")) {
-            listarper(0, l2model, jl_p2);
+            listarper(0, l2model, jl_personaje1);
         } else if (nombre.equals("Marvel")) {
-            listarper(1, l2model, jl_p2);
+            listarper(1, l2model, jl_personaje1);
         } else if (nombre.equals("Capcom")) {
-            listarper(2, l2model, jl_p2);
+            listarper(2, l2model, jl_personaje1);
         } else {
-            listarper(3, l2model, jl_p2);
+            listarper(3, l2model, jl_personaje1);
         }
-    }//GEN-LAST:event_jc_select2MouseEntered
+    }//GEN-LAST:event_cb_selectMouseClicked
+
+    private void combobox_select2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_combobox_select2MouseClicked
+        String name = combobox_select2.getSelectedItem().toString();
+        l3model.removeAllElements();
+        if (name.equals("DC")) {
+            listarper2(0, l3model, jl_personaje2);
+        } else if (name.equals("Marvel")) {
+            listarper2(1, l3model, jl_personaje2);
+        } else if (name.equals("Capcom")) {
+            listarper2(2, l3model, jl_personaje2);
+        } else {
+            listarper2(3, l3model, jl_personaje2);
+        }
+    }//GEN-LAST:event_combobox_select2MouseClicked
+
+    private void jl_personaje1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_personaje1MouseClicked
+
+    }//GEN-LAST:event_jl_personaje1MouseClicked
+
+    private void jb_batallaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_batallaMouseClicked
+        jf_simulacion.setVisible(false);
+        jf_batalla.setVisible(true);
+    }//GEN-LAST:event_jb_batallaMouseClicked
+
+    private void jb_mentalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_mentalMouseClicked
+        int l = new Random().nextInt((100 - 1) + 1) + 1;
+        ArrayList<Personaje> ps = new ArrayList();
+        ps = jugadores();
+        Personaje p = ps.get(0);
+        Personaje p1 = ps.get(1);
+        if (p.isDoble()==true) {
+            JOptionPane.showMessageDialog(jf_batalla, "turno perdido");
+            p.setDoble(false);
+        }else if (p1.isDoble()==true) {
+            JOptionPane.showMessageDialog(jf_batalla, "turno perdido");
+            p.setDoble(false);
+        }else{
+        int vida = p.getVida();
+        int vida2 = p1.getVida();
+        if (vida > 0 && vida2 > 0) {
+            if (l <= 15) {
+                if (p.isTurno() == true) {
+                    jlabel_jugador.setText(p.getNombre());
+                    jlabel_jugador.setBackground(Color.red);
+                    int ataque = ((int) (0.33 * p.getAmental())) * 2;
+                    vida2 -= ataque;
+                    p1.setVida(vida2);
+                    p.setTurno(false);
+                    p1.setTurno(true);
+                } else {
+                    jlabel_jugador.setText(p1.getNombre());
+                    jlabel_jugador.setBackground(Color.BLUE);
+                    int ataque = ((int) (0.33 * p1.getAmental())) * 2;
+                    vida -= ataque;
+                    p.setVida(vida);
+                    p.setTurno(true);
+                    p1.setTurno(false);
+                }
+            } else {
+                if (p.isTurno() == true) {
+                    jlabel_jugador.setText(p.getNombre());
+                    jlabel_jugador.setBackground(Color.red);
+                    int ataque = ((int) (0.33 * p.getAmental()));
+                    vida2 -= ataque;
+                    p1.setVida(vida2);
+                    p.setTurno(false);
+                    p1.setTurno(true);
+                } else {
+                    jlabel_jugador.setText(p1.getNombre());
+                    jlabel_jugador.setBackground(Color.BLUE);
+                    int ataque = ((int) (0.33 * p1.getAmental()));
+                    vida -= ataque;
+                    p.setVida(vida);
+                    p.setTurno(true);
+                    p1.setTurno(false);
+                }
+            }
+        } else {
+            if (vida > vida2) {
+                System.out.println("Gana jugador 1");
+            } else {
+                System.out.println("Gana jugador 2");
+            }
+        }
+        }
+    }//GEN-LAST:event_jb_mentalMouseClicked
+
+    private void jb_resistenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_resistenciaMouseClicked
+         ArrayList<Personaje> ps = new ArrayList();
+        ps = jugadores();
+        Personaje p = ps.get(0);
+        Personaje p1 = ps.get(1);
+        if (p.isDoble()==true) {
+            JOptionPane.showMessageDialog(jf_batalla, "turno perdido");
+            p.setDoble(false);
+        }else if (p1.isDoble()==true) {
+            JOptionPane.showMessageDialog(jf_batalla, "turno perdido");
+            p.setDoble(false);
+        }else{
+        int vida = p.getVida();
+        int vida2 = p1.getVida();
+        if (vida > 0 && vida2 > 0) {
+             if (p.isTurno() == true) {
+                     int fuerza= (int) (p.getFuerza()*0.15);
+                     jlabel_jugador.setText(p.getNombre());
+                     jlabel_jugador.setBackground(Color.red);
+                     vida+=fuerza;
+                     p.setDoble(true);
+                     p.setTurno(false);
+                    p1.setTurno(true);
+                } else {
+                 jlabel_jugador.setText(p1.getNombre());
+                 jlabel_jugador.setBackground(Color.BLUE);
+                     int fuerza= (int) (p1.getFuerza()*0.15);
+                     vida2+=fuerza;
+                     p.setDoble(true);
+                    p.setTurno(true);
+                    p1.setTurno(false);
+                }
+
+        } else {
+            if (vida > vida2) {
+                System.out.println("Gana jugador 1");
+            } else {
+                System.out.println("Gana jugador 2");
+            }
+        }
+        }
+    }//GEN-LAST:event_jb_resistenciaMouseClicked
+
+    private void jb_fuerzaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_fuerzaMouseClicked
+         int l = new Random().nextInt((100 - 1) + 1) + 1;
+        ArrayList<Personaje> ps = new ArrayList();
+        ps = jugadores();
+        Personaje p = ps.get(0);
+        Personaje p1 = ps.get(1);
+        if (p.isDoble()==true) {
+            JOptionPane.showMessageDialog(jf_batalla, "turno perdido");
+            p.setDoble(false);
+        }else if (p1.isDoble()==true) {
+            JOptionPane.showMessageDialog(jf_batalla, "turno perdido");
+            p.setDoble(false);
+        }else{
+        int vida = p.getVida();
+        int vida2 = p1.getVida();
+        if (vida > 0 && vida2 > 0) {
+            if (l <= 8) {
+                if (p.isTurno() == true) {
+                    jlabel_jugador.setText(p.getNombre());
+                    jlabel_jugador.setBackground(Color.red);
+                    int ataque = (int) (((int) (0.2* p.getAmental())) * 0.25);
+                    vida2 -= ataque;
+                    p1.setVida(vida2);
+                    p.setTurno(false);
+                    p1.setTurno(true);
+                } else {
+                    jlabel_jugador.setText(p1.getNombre());
+                    jlabel_jugador.setBackground(Color.BLUE);
+                    int ataque = (int) (((int) (0.2 * p1.getAmental())) * 0.25);
+                    vida -= ataque;
+                    p.setVida(vida);
+                    p.setTurno(true);
+                    p1.setTurno(false);
+                }
+            } else {
+                if (p.isTurno() == true) {
+                    jlabel_jugador.setText(p.getNombre());
+                    jlabel_jugador.setBackground(Color.red);
+                    int ataque = (((int) (0.2* p.getAmental())));
+                    vida2 -= ataque;
+                    p1.setVida(vida2);
+                    p.setTurno(false);
+                    p1.setTurno(true);
+                } else {
+                    jlabel_jugador.setText(p1.getNombre());
+                    jlabel_jugador.setBackground(Color.BLUE);
+                    int ataque = ((int) (0.2 * p1.getAmental()));
+                    vida -= ataque;
+                    p.setVida(vida);
+                    p.setTurno(true);
+                    p1.setTurno(false);
+                }
+            }
+        } else {
+            if (vida > vida2) {
+                System.out.println("Gana jugador 1");
+            } else {
+                System.out.println("Gana jugador 2");
+            }
+        }
+        }
+    }//GEN-LAST:event_jb_fuerzaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -690,9 +971,11 @@ public class Pantalla extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cb_select;
     private javax.swing.JComboBox<String> cb_universo;
+    private javax.swing.JComboBox<String> combobox_select2;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -707,21 +990,28 @@ public class Pantalla extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton jb_agregar;
+    private javax.swing.JButton jb_batalla;
     private javax.swing.JButton jb_crear;
     private javax.swing.JButton jb_crud;
+    private javax.swing.JButton jb_fuerza;
     private javax.swing.JButton jb_listar;
+    private javax.swing.JButton jb_mental;
     private javax.swing.JButton jb_regresarcrear;
+    private javax.swing.JButton jb_resistencia;
     private javax.swing.JButton jb_simulacion;
-    private javax.swing.JComboBox<String> jc_select2;
     private javax.swing.JDialog jd_crud;
+    private javax.swing.JFrame jf_batalla;
     private javax.swing.JFrame jf_crear;
     private javax.swing.JFrame jf_simulacion;
     private javax.swing.JFrame jf_tree;
     private javax.swing.JList<String> jl_elements;
     private javax.swing.JLabel jl_nombre;
-    private javax.swing.JList<String> jl_p1;
-    private javax.swing.JList<String> jl_p2;
+    private javax.swing.JList<String> jl_personaje1;
+    private javax.swing.JList<String> jl_personaje2;
+    private javax.swing.JLabel jlabel_jugador;
     private javax.swing.JMenuItem jmi_eliminar;
     private javax.swing.JSpinner js_fisica;
     private javax.swing.JSpinner js_fuerza;
@@ -738,7 +1028,8 @@ DefaultTableModel tmodel = new DefaultTableModel();
 
     ArrayList<Personaje> personajes = new ArrayList();
     DefaultListModel lmodel = new DefaultListModel();
-     DefaultListModel l2model = new DefaultListModel();
+    DefaultListModel l2model = new DefaultListModel();
+    DefaultListModel l3model = new DefaultListModel();
 
     public void listar(Personaje p) {
         lmodel.removeAllElements();
@@ -750,15 +1041,15 @@ DefaultTableModel tmodel = new DefaultTableModel();
         jl_elements.setModel(lmodel);
 
     }
-    
-    public void listarper(int index, DefaultListModel e, JList l){
+
+    public void listarper(int index, DefaultListModel e, JList l) {
         e.removeAllElements();
-         l.setModel(e);
-          for (Personaje p : personajes) {
-              p.setValid(true);
+        l.setModel(e);
+        for (Personaje p : personajes) {
+            p.setValid(true);
             if (index == 0) {
                 if (p.getUniverso().equals("DC")) {
-                   e.addElement(p);
+                    e.addElement(p);
                 }
 
             } else if (index == 1) {
@@ -767,14 +1058,40 @@ DefaultTableModel tmodel = new DefaultTableModel();
                 }
             } else if (index == 2) {
                 if (p.getUniverso().equals("Capcom")) {
-                     e.addElement(p);
+                    e.addElement(p);
                 }
             } else if (index == 3) {
                 if (p.getUniverso().equals("Mortal Kombat")) {
                     e.addElement(p);
                 }
             }
+        }
     }
+
+    public void listarper2(int index, DefaultListModel e, JList l) {
+        e.removeAllElements();
+        l.setModel(e);
+        for (Personaje p : personajes) {
+            p.setValid(true);
+            if (index == 0) {
+                if (p.getUniverso().equals("DC")) {
+                    e.addElement(p);
+                }
+
+            } else if (index == 1) {
+                if (p.getUniverso().equals("Marvel")) {
+                    e.addElement(p);
+                }
+            } else if (index == 2) {
+                if (p.getUniverso().equals("Capcom")) {
+                    e.addElement(p);
+                }
+            } else if (index == 3) {
+                if (p.getUniverso().equals("Mortal Kombat")) {
+                    e.addElement(p);
+                }
+            }
+        }
     }
 
     public void tabla(int index) {
@@ -837,5 +1154,30 @@ DefaultTableModel tmodel = new DefaultTableModel();
         m.reload();
 
     }
-}
 
+    public ArrayList jugadores() {
+        String per1 = jl_personaje1.getSelectedValue();
+        String per2 = jl_personaje2.getSelectedValue();
+        Personaje jugador = new Personaje();
+        Personaje jugador2 = new Personaje();
+        for (Personaje p : personajes) {
+            p.setValid(true);
+            if (per1.equals(p.toString())) {
+                jugador = p;
+                jugador.setTurno(true);
+                jugador.setDoble(false);
+            }
+            if (per1.equals(p.toString())) {
+                jugador2 = p;
+                jugador2.setTurno(false);
+                jugador2.setDoble(false);
+            }
+        }
+        int vida1 = jugador.getVida();
+        int vida2 = jugador2.getVida();
+        ArrayList<Personaje> jugadores = new ArrayList();
+        jugadores.add(jugador);
+        jugadores.add(jugador2);
+        return jugadores;
+    }
+}
