@@ -97,7 +97,7 @@ public class Pantalla extends javax.swing.JFrame {
         jf_batalla = new javax.swing.JFrame();
         jlabel_jugador = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        ja_pelea = new javax.swing.JTextArea();
         jb_fuerza = new javax.swing.JButton();
         jb_mental = new javax.swing.JButton();
         jb_resistencia = new javax.swing.JButton();
@@ -416,6 +416,11 @@ public class Pantalla extends javax.swing.JFrame {
                 jb_batallaMouseClicked(evt);
             }
         });
+        jb_batalla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_batallaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jf_simulacionLayout = new javax.swing.GroupLayout(jf_simulacion.getContentPane());
         jf_simulacion.getContentPane().setLayout(jf_simulacionLayout);
@@ -457,9 +462,9 @@ public class Pantalla extends javax.swing.JFrame {
 
         jLabel11.setText("Darle clic a un personaje de cada lista");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane6.setViewportView(jTextArea1);
+        ja_pelea.setColumns(20);
+        ja_pelea.setRows(5);
+        jScrollPane6.setViewportView(ja_pelea);
 
         jb_fuerza.setText("Fuerza");
         jb_fuerza.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -591,8 +596,8 @@ public class Pantalla extends javax.swing.JFrame {
     private void jb_crearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_crearMouseClicked
         jf_crear.pack();
         jf_crear.setLocationRelativeTo(jd_crud);
-        jf_crear.setVisible(true);
         jd_crud.setVisible(false);
+        jf_crear.setVisible(true);
 
     }//GEN-LAST:event_jb_crearMouseClicked
 
@@ -632,8 +637,8 @@ public class Pantalla extends javax.swing.JFrame {
     private void jb_listarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_listarMouseClicked
         jf_tree.pack();
         jf_tree.setLocationRelativeTo(this);
-        jf_tree.setVisible(true);
         this.setVisible(false);
+        jf_tree.setVisible(true);
     }//GEN-LAST:event_jb_listarMouseClicked
 
     private void jt_PersonajesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_PersonajesMouseClicked
@@ -716,6 +721,8 @@ public class Pantalla extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_regresarcrearMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+      this.pack();
+        this.setLocationRelativeTo(jf_tree);
         jf_tree.setVisible(false);
         this.setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked
@@ -760,6 +767,8 @@ public class Pantalla extends javax.swing.JFrame {
     }//GEN-LAST:event_jl_personaje1MouseClicked
 
     private void jb_batallaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_batallaMouseClicked
+        jf_batalla.pack();
+        jf_batalla.setLocationRelativeTo(jf_simulacion);
         jf_simulacion.setVisible(false);
         jf_batalla.setVisible(true);
     }//GEN-LAST:event_jb_batallaMouseClicked
@@ -770,168 +779,184 @@ public class Pantalla extends javax.swing.JFrame {
         ps = jugadores();
         Personaje p = ps.get(0);
         Personaje p1 = ps.get(1);
-        if (p.isDoble()==true) {
+        if (p.isDoble() == true) {
             JOptionPane.showMessageDialog(jf_batalla, "turno perdido");
             p.setDoble(false);
-        }else if (p1.isDoble()==true) {
+        } else if (p1.isDoble() == true) {
             JOptionPane.showMessageDialog(jf_batalla, "turno perdido");
             p.setDoble(false);
-        }else{
-        int vida = p.getVida();
-        int vida2 = p1.getVida();
-        if (vida > 0 && vida2 > 0) {
-            if (l <= 15) {
-                if (p.isTurno() == true) {
-                    jlabel_jugador.setText(p.getNombre());
-                    jlabel_jugador.setBackground(Color.red);
-                    int ataque = ((int) (0.33 * p.getAmental())) * 2;
-                    vida2 -= ataque;
-                    p1.setVida(vida2);
-                    p.setTurno(false);
-                    p1.setTurno(true);
-                } else {
-                    jlabel_jugador.setText(p1.getNombre());
-                    jlabel_jugador.setBackground(Color.BLUE);
-                    int ataque = ((int) (0.33 * p1.getAmental())) * 2;
-                    vida -= ataque;
-                    p.setVida(vida);
-                    p.setTurno(true);
-                    p1.setTurno(false);
-                }
-            } else {
-                if (p.isTurno() == true) {
-                    jlabel_jugador.setText(p.getNombre());
-                    jlabel_jugador.setBackground(Color.red);
-                    int ataque = ((int) (0.33 * p.getAmental()));
-                    vida2 -= ataque;
-                    p1.setVida(vida2);
-                    p.setTurno(false);
-                    p1.setTurno(true);
-                } else {
-                    jlabel_jugador.setText(p1.getNombre());
-                    jlabel_jugador.setBackground(Color.BLUE);
-                    int ataque = ((int) (0.33 * p1.getAmental()));
-                    vida -= ataque;
-                    p.setVida(vida);
-                    p.setTurno(true);
-                    p1.setTurno(false);
-                }
-            }
         } else {
-            if (vida > vida2) {
-                System.out.println("Gana jugador 1");
+            int vida = p.getVida();
+            int vida2 = p1.getVida();
+            if (vida > 0 && vida2 > 0) {
+                if (l <= 15) {
+                    if (p.isTurno() == true) {
+                        jlabel_jugador.setText(p.getNombre());
+                        jlabel_jugador.setBackground(Color.red);
+                        int ataque = ((int) (0.33 * p.getAmental())) * 2;
+                        vida2 -= ataque;
+                        p1.setVida(vida2);
+                        p.setTurno(false);
+                        p1.setTurno(true);
+                        ja_pelea.setText(p.getNombre() + "hizo un ataque mental a " + p1.getNombre() + "y sus puntos de vida ahora son: " + vida2);
+                    } else {
+                        jlabel_jugador.setText(p1.getNombre());
+                        jlabel_jugador.setBackground(Color.BLUE);
+                        int ataque = ((int) (0.33 * p1.getAmental())) * 2;
+                        vida -= ataque;
+                        p.setVida(vida);
+                        p.setTurno(true);
+                        p1.setTurno(false);
+                        ja_pelea.setText(p1.getNombre() + "hizo un ataque de fuerza a " + p.getNombre() + "y sus puntos de vida ahora son: " + vida);
+                    }
+                } else {
+                    if (p.isTurno() == true) {
+                        jlabel_jugador.setText(p.getNombre());
+                        jlabel_jugador.setBackground(Color.red);
+                        int ataque = ((int) (0.33 * p.getAmental()));
+                        vida2 -= ataque;
+                        p1.setVida(vida2);
+                        p.setTurno(false);
+                        p1.setTurno(true);
+                        ja_pelea.setText(p.getNombre() + "hizo un ataque mental a " + p1.getNombre() + "y sus puntos de vida ahora son: " + vida2);
+                    } else {
+                        jlabel_jugador.setText(p1.getNombre());
+                        jlabel_jugador.setBackground(Color.BLUE);
+                        int ataque = ((int) (0.33 * p1.getAmental()));
+                        vida -= ataque;
+                        p.setVida(vida);
+                        p.setTurno(true);
+                        p1.setTurno(false);
+                        ja_pelea.setText(p1.getNombre() + "hizo un ataque de fuerza a " + p.getNombre() + "y sus puntos de vida ahora son: " + vida);
+                    }
+                }
             } else {
-                System.out.println("Gana jugador 2");
+                if (vida > vida2) {
+                    System.out.println("Gana jugador 1");
+                } else {
+                    System.out.println("Gana jugador 2");
+                }
             }
-        }
         }
     }//GEN-LAST:event_jb_mentalMouseClicked
 
     private void jb_resistenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_resistenciaMouseClicked
-         ArrayList<Personaje> ps = new ArrayList();
-        ps = jugadores();
-        Personaje p = ps.get(0);
-        Personaje p1 = ps.get(1);
-        if (p.isDoble()==true) {
-            JOptionPane.showMessageDialog(jf_batalla, "turno perdido");
-            p.setDoble(false);
-        }else if (p1.isDoble()==true) {
-            JOptionPane.showMessageDialog(jf_batalla, "turno perdido");
-            p.setDoble(false);
-        }else{
-        int vida = p.getVida();
-        int vida2 = p1.getVida();
-        if (vida > 0 && vida2 > 0) {
-             if (p.isTurno() == true) {
-                     int fuerza= (int) (p.getFuerza()*0.15);
-                     jlabel_jugador.setText(p.getNombre());
-                     jlabel_jugador.setBackground(Color.red);
-                     vida+=fuerza;
-                     p.setDoble(true);
-                     p.setTurno(false);
-                    p1.setTurno(true);
-                } else {
-                 jlabel_jugador.setText(p1.getNombre());
-                 jlabel_jugador.setBackground(Color.BLUE);
-                     int fuerza= (int) (p1.getFuerza()*0.15);
-                     vida2+=fuerza;
-                     p.setDoble(true);
-                    p.setTurno(true);
-                    p1.setTurno(false);
-                }
-
-        } else {
-            if (vida > vida2) {
-                System.out.println("Gana jugador 1");
-            } else {
-                System.out.println("Gana jugador 2");
-            }
-        }
-        }
-    }//GEN-LAST:event_jb_resistenciaMouseClicked
-
-    private void jb_fuerzaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_fuerzaMouseClicked
-         int l = new Random().nextInt((100 - 1) + 1) + 1;
         ArrayList<Personaje> ps = new ArrayList();
         ps = jugadores();
         Personaje p = ps.get(0);
         Personaje p1 = ps.get(1);
-        if (p.isDoble()==true) {
+        if (p.isDoble() == true) {
             JOptionPane.showMessageDialog(jf_batalla, "turno perdido");
             p.setDoble(false);
-        }else if (p1.isDoble()==true) {
+        } else if (p1.isDoble() == true) {
             JOptionPane.showMessageDialog(jf_batalla, "turno perdido");
             p.setDoble(false);
-        }else{
-        int vida = p.getVida();
-        int vida2 = p1.getVida();
-        if (vida > 0 && vida2 > 0) {
-            if (l <= 8) {
-                if (p.isTurno() == true) {
-                    jlabel_jugador.setText(p.getNombre());
-                    jlabel_jugador.setBackground(Color.red);
-                    int ataque = (int) (((int) (0.2* p.getAmental())) * 0.25);
-                    vida2 -= ataque;
-                    p1.setVida(vida2);
-                    p.setTurno(false);
-                    p1.setTurno(true);
-                } else {
-                    jlabel_jugador.setText(p1.getNombre());
-                    jlabel_jugador.setBackground(Color.BLUE);
-                    int ataque = (int) (((int) (0.2 * p1.getAmental())) * 0.25);
-                    vida -= ataque;
-                    p.setVida(vida);
-                    p.setTurno(true);
-                    p1.setTurno(false);
-                }
-            } else {
-                if (p.isTurno() == true) {
-                    jlabel_jugador.setText(p.getNombre());
-                    jlabel_jugador.setBackground(Color.red);
-                    int ataque = (((int) (0.2* p.getAmental())));
-                    vida2 -= ataque;
-                    p1.setVida(vida2);
-                    p.setTurno(false);
-                    p1.setTurno(true);
-                } else {
-                    jlabel_jugador.setText(p1.getNombre());
-                    jlabel_jugador.setBackground(Color.BLUE);
-                    int ataque = ((int) (0.2 * p1.getAmental()));
-                    vida -= ataque;
-                    p.setVida(vida);
-                    p.setTurno(true);
-                    p1.setTurno(false);
-                }
-            }
         } else {
-            if (vida > vida2) {
-                System.out.println("Gana jugador 1");
+            int vida = p.getVida();
+            int vida2 = p1.getVida();
+            if (vida > 0 && vida2 > 0) {
+                if (p.isTurno() == true) {
+                    int fuerza = (int) (p.getFuerza() * 0.15);
+                    jlabel_jugador.setText(p.getNombre());
+                    jlabel_jugador.setBackground(Color.red);
+                    vida += fuerza;
+                    p.setDoble(true);
+                    p.setTurno(false);
+                    p1.setTurno(true);
+                    p.setVida(vida);
+                    ja_pelea.setText(p.getNombre() + " hizo un ataque de resistencia a " + p1.getNombre() + "y aumento su propia vida a: " + vida);
+                } else {
+                    jlabel_jugador.setText(p1.getNombre());
+                    jlabel_jugador.setBackground(Color.BLUE);
+                    int fuerza = (int) (p1.getFuerza() * 0.15);
+                    vida2 += fuerza;
+                    p1.setVida(vida2);
+                    p.setDoble(true);
+                    p.setTurno(true);
+                    p1.setTurno(false);
+                    ja_pelea.setText(p1.getNombre() + " hizo un ataque de resistencia a " + p.getNombre() + "y aumento su propia vida a: " + vida2);
+                }
+
             } else {
-                System.out.println("Gana jugador 2");
+                if (vida > vida2) {
+                    System.out.println("Gana jugador 1");
+                } else {
+                    System.out.println("Gana jugador 2");
+                }
             }
         }
+    }//GEN-LAST:event_jb_resistenciaMouseClicked
+
+    private void jb_fuerzaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_fuerzaMouseClicked
+        int l = new Random().nextInt((100 - 1) + 1) + 1;
+        ArrayList<Personaje> ps = new ArrayList();
+        ps = jugadores();
+        Personaje p = ps.get(0);
+        Personaje p1 = ps.get(1);
+        if (p.isDoble() == true) {
+            JOptionPane.showMessageDialog(jf_batalla, "turno perdido");
+            p.setDoble(false);
+        } else if (p1.isDoble() == true) {
+            JOptionPane.showMessageDialog(jf_batalla, "turno perdido");
+            p.setDoble(false);
+        } else {
+            int vida = p.getVida();
+            int vida2 = p1.getVida();
+            if (vida > 0 && vida2 > 0) {
+                if (l <= 8) {
+                    if (p.isTurno() == true) {
+                        jlabel_jugador.setText(p.getNombre());
+                        jlabel_jugador.setBackground(Color.red);
+                        int ataque = (int) (((int) (0.2 * p.getAmental())) * 0.25);
+                        vida2 -= ataque;
+                        p1.setVida(vida2);
+                        p.setTurno(false);
+                        p1.setTurno(true);
+                        ja_pelea.setText(p.getNombre() + "hizo un ataque de fuerza a " + p1.getNombre() + "y sus puntos de vida ahora son: " + vida2);
+                    } else {
+                        jlabel_jugador.setText(p1.getNombre());
+                        jlabel_jugador.setBackground(Color.BLUE);
+                        int ataque = (int) (((int) (0.2 * p1.getAmental())) * 0.25);
+                        vida -= ataque;
+                        p.setVida(vida);
+                        p.setTurno(true);
+                        p1.setTurno(false);
+                        ja_pelea.setText(p1.getNombre() + "hizo un ataque de fuerza a " + p.getNombre() + "y sus puntos de vida ahora son: " + vida);
+                    }
+                } else {
+                    if (p.isTurno() == true) {
+                        jlabel_jugador.setText(p.getNombre());
+                        jlabel_jugador.setBackground(Color.red);
+                        int ataque = (((int) (0.2 * p.getAmental())));
+                        vida2 -= ataque;
+                        p1.setVida(vida2);
+                        p.setTurno(false);
+                        p1.setTurno(true);
+                        ja_pelea.setText(p.getNombre() + "hizo un ataque de fuerza a " + p1.getNombre() + "y sus puntos de vida ahora son: " + vida2);
+                    } else {
+                        jlabel_jugador.setText(p1.getNombre());
+                        jlabel_jugador.setBackground(Color.BLUE);
+                        int ataque = ((int) (0.2 * p1.getAmental()));
+                        vida -= ataque;
+                        p.setVida(vida);
+                        p.setTurno(true);
+                        p1.setTurno(false);
+                        ja_pelea.setText(p1.getNombre() + "hizo un ataque de fuerza a " + p.getNombre() + "y sus puntos de vida ahora son: " + vida);
+                    }
+                }
+            } else {
+                if (vida > vida2) {
+                    System.out.println("Gana jugador 1");
+                } else {
+                    System.out.println("Gana jugador 2");
+                }
+            }
         }
     }//GEN-LAST:event_jb_fuerzaMouseClicked
+
+    private void jb_batallaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_batallaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_batallaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -991,7 +1016,7 @@ public class Pantalla extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea ja_pelea;
     private javax.swing.JButton jb_agregar;
     private javax.swing.JButton jb_batalla;
     private javax.swing.JButton jb_crear;
@@ -1065,7 +1090,9 @@ DefaultTableModel tmodel = new DefaultTableModel();
                     e.addElement(p);
                 }
             }
+            
         }
+        l.setModel(e);
     }
 
     public void listarper2(int index, DefaultListModel e, JList l) {
@@ -1092,6 +1119,7 @@ DefaultTableModel tmodel = new DefaultTableModel();
                 }
             }
         }
+         l.setModel(e);
     }
 
     public void tabla(int index) {
